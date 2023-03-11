@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+body {
+  margin: 0;
+  height: 100vh;
+  font-size: 1rem;
+  font-family: "Quicksand", sans-serif; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:root{
+  --main-color: white;
+  --sub-color:#474A4F;
+  --comp-color: rgb(255 200 1);
+}
+
+.img-navbar{
+    width :48px;
+    height:48px;
+    margin:0 20px
+}
+
+.navbar-button{
+    text-decoration: none;
+    color: black;
+}
+
+.hero-banner-img {
+    position: absolute;
+    right: 40px;
+    top: 0px;
+    width: 600px;
+    height: 600px;
+    margin-top: -7rem;
+  
+  }
+
+  .loginSignupHeading{
+    text-align: center;
+    color:black;
+  }
+
+  /* setReminderScreen */
+  .setReminderPaper {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  .setReminder {
+    min-width: 100%;
+    min-height: 100%;
+    background: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.grid-container {
+  
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 1fr 5rem;
+  height: 100%;
+}
+header {
+  grid-area: header;
+  background-color: var(--main-color);
+  height: 6rem;
+}
+
+/* Header */
+header a {
+  color: black;
+  padding: 1rem;
+}
+a.brand {
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 2rem;
+}
+a.brand:hover{
+  color: var(--comp-color);
+}
+.sgnin{
+  margin-right: 2rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.row.center {
+  justify-content: center;
+}
+.row.top {
+  align-items: flex-start;
+}
+
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: var(--comp-color);
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+li {
+  margin-top: 1rem;
+}
+
+
+/* Dropdown */
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+.dropdown-content {
+  position: absolute;
+  display: none;
+  right: 0;
+  min-width: 15rem;
+  padding: 1rem;
+  z-index: 1;
+  background-color: var(--sub-color);
+  margin: 0;
+  margin-top: 0.4rem;
+  border-radius: 0.5rem;
+}
+.dropdown-content a{
+  color : var(--main-color);
+}
+.dropdown-content a:hover {
+  color: var(--comp-color);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
