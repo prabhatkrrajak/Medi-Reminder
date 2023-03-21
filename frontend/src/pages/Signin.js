@@ -14,6 +14,7 @@ import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../redux/actions/userActions";
+import MessageBox from "../components/MessageBox";
 const Signin = () => {
   const [checked, setChecked] = useState(true);
 
@@ -59,6 +60,9 @@ const Signin = () => {
             <HttpsOutlinedIcon />
           </Avatar>
           <h2 style={headerStyle}>Sign In</h2>
+        </Grid>
+        <Grid align="center">
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         </Grid>
         <Grid
           container

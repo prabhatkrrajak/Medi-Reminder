@@ -31,6 +31,7 @@ body {
     width: 600px;
     height: 600px;
     margin-top: -7rem;
+    z-index: -1;
   
   }
 
@@ -84,7 +85,6 @@ a.brand {
   color: black;
   font-size: 2rem;
   font-weight: bold;
-  margin-left: 2rem;
 }
 a.brand:hover{
   color: var(--comp-color);
@@ -151,3 +151,42 @@ li {
   display: block;
 }
 
+@media only screen and (max-width: 850px) {
+  body{
+    font-size: 2vh;
+  }
+  .hero-banner-img {
+    position: absolute;
+    right: 40px;
+    top: 0px;
+    width: 400px;
+    height: 400px;
+    margin-top: -3rem;
+    z-index: -1;
+    opacity: .7;
+  
+  }
+  a.brand{
+    font-size: 3vh;
+  }
+}
+
+
+.alert {
+  display: inline-block;
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border-radius: 0.5rem;
+}
+.alert-info {
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+.alert-danger {
+  color: #a02020;
+  background-color: #ffe0e0;
+}
+.alert-success {
+  color: #20a020;
+  background-color: #eeffe0;
+}

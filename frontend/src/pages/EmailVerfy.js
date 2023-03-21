@@ -43,7 +43,7 @@ const EmailVerify = () => {
 			{validUrl ? (
 				<div style = {containerStyle}>
 					<img src={success} alt="success_img" style = {imgStyle}/>
-					<h1>Email verified successfully</h1>
+					<h1 className="alert-success">Email verified successfully</h1>
 					<Link to="/signin" style={{ textDecoration: 'none' }}>
                         <Button variant="contained" color="success">Signin</Button>
 					</Link>

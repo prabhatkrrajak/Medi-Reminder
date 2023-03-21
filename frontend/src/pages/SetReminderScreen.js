@@ -1,17 +1,35 @@
 import { Button, Grid, Paper, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { useParams } from "react-router-dom";
 
 const SetReminderScreen = () => {
   const [reminderMsg, setReminderMsg] = useState("");
   const [remindAt, setRemindAt] = useState();
-  const [reminderList, setReminderList] = useState([]);
+  const [ reminderList, setReminderList ] = useState([])
+  const param = useParams();
 
-  const addReminder = () => {};
 
-  const deleteReminder = (id) => {};
+  useEffect(() => {
+    Axios.get(`http://localhost:5000/api/reminders/${param.id}/getAllReminder`).then( res => setReminderList(res.data))
+    
+}, [param])
+
+const addReminder = () => {
+  Axios.post(`http://localhost:5000/api/reminders/${param.id}/addReminder`, { reminderMsg, remindAt })
+  .then( res => setReminderList(res.data))
+  setReminderMsg("")
+  setRemindAt()
+}
+
+
+const deleteReminder = (id) => {
+  Axios.post(`http://localhost:5000/api/reminders/${param.id}/deleteReminder`, { id })
+  .then( res => setReminderList(res.data))
+}
 
   const paperStyle = {
     padding: "30px 20px",
@@ -56,7 +74,8 @@ const SetReminderScreen = () => {
         </Grid>
 
         <Grid container spacing={1} direction={"column"}>
-          <Grid item>
+        {reminderList.map((reminder) => (
+          <Grid item key={reminder._id}>
             <Grid
               sx={{ border: 1, borderColor: "grey.500" }}
               container
@@ -66,72 +85,24 @@ const SetReminderScreen = () => {
               alignItems={"center"}
             >
               <Grid item xs={3}>
-                <p>Medicine Name</p>
+                <p>{reminder.reminderMsg}</p>
               </Grid>
               <Grid item xs={3}>
                 <p>Remind Me at:</p>
               </Grid>
               <Grid item xs={3}>
-                <p>26/10/2023 @ 2AM</p>
+              <p>{String(new Date(reminder.remindAt.toLocaleString(undefined, {timezone:"Asia/Kolkata"})))}</p>
               </Grid>
               <Grid item xs={3}>
-                <Button variant="outlined" color="error" size="small">
+                <Button variant="outlined" color="error" size="small" onClick={() => deleteReminder(reminder._id)}>
                   Delete
                 </Button>
               </Grid>
             </Grid>
           </Grid>
+        ))}
 
-          <Grid item>
-            <Grid
-              sx={{ border: 1, borderColor: "grey.500" }}
-              container
-              spacing={1}
-              direction={"row"}
-              justify={"center"}
-              alignItems={"center"}
-            >
-              <Grid item xs={3}>
-                <p>Medicine Name</p>
-              </Grid>
-              <Grid item xs={3}>
-                <p>Remind Me at:</p>
-              </Grid>
-              <Grid item xs={3}>
-                <p>26/10/2023 @ 2AM</p>
-              </Grid>
-              <Grid item xs={3}>
-                <Button variant="outlined"color="error" size="small">
-                  Delete
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
         </Grid>
-
-        <div className="homepage_body">
-          {reminderList.map((reminder) => (
-            <div className="reminder_card" key={reminder._id}>
-              <h2>{reminder.reminderMsg}</h2>
-              <h3>Remind Me at:</h3>
-              <p>
-                {String(
-                  new Date(
-                    reminder.remindAt.toLocaleString(undefined, {
-                      timezone: "Asia/Kolkata",
-                    })
-                  )
-                )}
-              </p>
-              <div
-                className="button"
-                onClick={() => deleteReminder(reminder._id)}
-              >
-                Delete
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </Paper>
   );

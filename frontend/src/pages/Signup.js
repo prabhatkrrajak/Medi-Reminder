@@ -15,6 +15,7 @@ import { FormControl, FormControlLabel, FormLabel } from "@mui/material";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../redux/actions/userActions";
+import MessageBox from "../components/MessageBox";
 const Signup = () => {
   const paperStyle = {
     padding: "30px 20px",
@@ -72,6 +73,9 @@ const Signup = () => {
           <Typography variant="caption" gutterBottom>
             Please fill this form to create an account !
           </Typography>
+        </Grid>
+        <Grid align="center">
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         </Grid>
         <Grid
           container

@@ -21,7 +21,7 @@ const App = () => {
       </Sticky>
       
       <Routes>
-        <Route path="/setreminder" element={<SetReminderScreen/>}/>
+        <Route path="/:id/setreminder" element={<SetReminderScreen/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/signin" element={<Signin/>}/>
         <Route path="/signup" element={<Signup/>}/>
