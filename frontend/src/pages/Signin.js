@@ -40,7 +40,7 @@ const Signin = () => {
   const navigate = useNavigate();
     useEffect(() => {
       if (userInfo) {
-        navigate(`/${userInfo._id}/profile`);
+        navigate(`/${userInfo._id}`);
       }
     }, [navigate, userInfo]);
 
@@ -53,7 +53,7 @@ const Signin = () => {
   };
 
   return (
-    <div style={{ padding: 30 }}>
+    <div style={{ padding: 5}}>
       <Paper variant="outlined" style={paperStyle}>
         <Grid align="center">
           <Avatar style={avatarStyle}>

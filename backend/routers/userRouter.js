@@ -46,6 +46,7 @@ userRouter.post("/signin", expressAsyncHandler(async (req, res) => {
             email: user.email,
             gender: user.gender,
             phoneNumber: user.phoneNumber,
+            guardianPhoneNumber: user.guardianPhoneNumber,
             token: generateToken(user),
           });
 	} catch (error) {
@@ -66,6 +67,7 @@ userRouter.post(
       email: req.body.email,
       gender: req.body.gender,
       phoneNumber: req.body.phoneNumber,
+      guardianPhoneNumber: req.body.guardianPhoneNumber,
       password: bcrypt.hashSync(req.body.password, 8),
     });
     const createdUser = user.save();

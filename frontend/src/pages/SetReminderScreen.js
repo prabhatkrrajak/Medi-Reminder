@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, TextField } from "@mui/material";
+import { Button, Grid, Paper, TextField, InputAdornment} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 const SetReminderScreen = () => {
   const [reminderMsg, setReminderMsg] = useState("");
+  const[qty, setQty] = useState("");
   const [remindAt, setRemindAt] = useState();
   const [ reminderList, setReminderList ] = useState([])
   const param = useParams();
@@ -19,7 +20,7 @@ const SetReminderScreen = () => {
 }, [param])
 
 const addReminder = () => {
-  Axios.post(`http://localhost:5000/api/reminders/${param.id}/addReminder`, { reminderMsg, remindAt })
+  Axios.post(`http://localhost:5000/api/reminders/${param.id}/addReminder`, { reminderMsg, qty, remindAt })
   .then( res => setReminderList(res.data))
   setReminderMsg("")
   setRemindAt()
@@ -48,12 +49,20 @@ const deleteReminder = (id) => {
           alignItems={"center"}
           marginBottom={"2rem"}
         >
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <TextField
               fullWidth
               label="Medicine Name"
               value={reminderMsg}
               onChange={(e) => setReminderMsg(e.target.value)}
+            ></TextField>
+          </Grid>
+          <Grid item xs={2}>
+          <TextField
+              fullWidth
+              label="Quantity"
+              value={qty}
+              onChange={(e) => setQty(e.target.value)}
             ></TextField>
           </Grid>
           <Grid item xs={3}>
@@ -85,15 +94,12 @@ const deleteReminder = (id) => {
               alignItems={"center"}
             >
               <Grid item xs={3}>
-                <p>{reminder.reminderMsg}</p>
+                <p>💊{reminder.reminderMsg} - {reminder.qty} unit</p>
               </Grid>
-              <Grid item xs={3}>
-                <p>Remind Me at:</p>
+              <Grid item xs={7}>
+              <p>Remind Me at: ⏲️{String(new Date(reminder.remindAt.toLocaleString(undefined, {timezone:"Asia/Kolkata"})))}</p>
               </Grid>
-              <Grid item xs={3}>
-              <p>{String(new Date(reminder.remindAt.toLocaleString(undefined, {timezone:"Asia/Kolkata"})))}</p>
-              </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={2}>
                 <Button variant="outlined" color="error" size="small" onClick={() => deleteReminder(reminder._id)}>
                   Delete
                 </Button>

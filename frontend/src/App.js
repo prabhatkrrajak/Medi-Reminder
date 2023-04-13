@@ -12,6 +12,8 @@ import SetReminderScreen from './pages/SetReminderScreen';
 import EmailVerify from './pages/EmailVerfy';
 import Profile from './pages/Profile';
 import Sticky from 'react-stickynode';
+import UserWelcomePage from './pages/UserWelcomePage';
+import ReminderVerify from './pages/ReminderVerify';
 
 const App = () => {
   return (
@@ -25,8 +27,10 @@ const App = () => {
         <Route path="/about" element={<About/>}/>
         <Route path="/signin" element={<Signin/>}/>
         <Route path="/signup" element={<Signup/>}/>
+        <Route path=":id" element={<UserWelcomePage/>}/>
         <Route path=":id/profile" element={<Profile/>}/>
         <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+        <Route path="/reminders/:id/verify" element={<ReminderVerify/>}/>
         <Route path="/" element={<Home/>} exact/>
       </Routes>
       <Footer/>

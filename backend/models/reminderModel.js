@@ -8,8 +8,11 @@ const reminderSchema = new Schema({
         required: true,
 	},
     reminderMsg : { type: String},
+    qty: { type: Number},
     remindAt : { type: String},
-    isReminded : { type: Boolean}
+    isRemindedBefore : { type: Boolean},
+    isRemindedAfter : {type : Boolean}, 
+    isConfirmed :{ type: Boolean}
 });
 
 const Reminder = mongoose.model("reminder", reminderSchema)

@@ -46,10 +46,11 @@ const reminderRouter = express.Router();
 
     const user = await User.findOne({ _id: req.params.id });
     if (!user) return res.status(400).send({ message: "Invalid link" });
-    const {reminderMsg, remindAt } = req.body
+    const {reminderMsg, qty, remindAt } = req.body
     const reminder = new Reminder({
         userId : user._id,
         reminderMsg,
+        qty,
         remindAt,
         isReminded: false
     })
@@ -78,6 +79,21 @@ const reminderRouter = express.Router();
         }
 
     }))
+
+    reminderRouter.get("/:id/verify", expressAsyncHandler(async (req, res) => {
+        // try {
+          const reminder = await Reminder.findOne({ _id: req.params.id });
+          console.log(reminder)
+          if (!reminder) return res.status(400).send({ message: "Invalid link" });
+      
+          await Reminder.updateOne({ _id: reminder.id}, {$set:{isConfirmed: true }});
+          // await token.remove();
+      
+          res.status(200).send({ message: "Medicine Taken Successfully" });
+        // } catch (error) {
+        //   res.status(500).send({ message: "Internal Server Error" });
+        // }
+      }));
 
 
 export default reminderRouter;

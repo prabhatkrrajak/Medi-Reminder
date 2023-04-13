@@ -30,6 +30,7 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [guardianPhoneNumber, setGuardianPhoneNumber] = useState('');
   const [gender,setGender] = useState('male');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -51,7 +52,7 @@ const Signup = () => {
     if (password !== confirmPassword) {
       alert('Password and confirm password are not match');
     } else {
-      dispatch(signup(name, email, gender, phoneNumber, password));
+      dispatch(signup(name, email, gender, phoneNumber, guardianPhoneNumber, password));
     }
   };
 
@@ -63,7 +64,7 @@ const Signup = () => {
     }, [navigate, userInfo]);
 
   return (
-    <div style={{ padding: 30 }}>
+    <div style={{ padding: 5 }}>
       <Paper elevation={0} variant="outlined" style={paperStyle}>
         <Grid align="center">
           <Avatar style={avatarStyle}>
@@ -119,6 +120,14 @@ const Signup = () => {
               label="Phone Number"
               placeholder="Enter your phone number"
               onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Guardian Phone Number"
+              placeholder="Enter Guardian phone number"
+              onChange={(e) => setGuardianPhoneNumber(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

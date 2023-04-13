@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
       <div className="grid-container">
-      <header className="row">
+      <header className="row" style={{borderBottom:"1px solid #c5c0c0"}}>
         <div>
         <Link to="/">
             <img src={Logo} alt = "logo" className='img-navbar'/>

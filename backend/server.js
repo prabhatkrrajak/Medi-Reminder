@@ -30,19 +30,56 @@ setInterval(async () => {
   const reminderList = await Reminder.find({});
   if (reminderList) {
     Array.from(reminderList).forEach(async (reminder) => {
-      if (!reminder.isReminded) {
+      if (!reminder.isRemindedBefore) {
         const user = await User.findOne({_id:reminder.userId})
         const now = new Date();
-        if (new Date(reminder.remindAt) - now < 0) {
-          await Reminder.findOneAndUpdate({_id :reminder._id},{$set:{isReminded: true }})
+        const msg = reminder.reminderMsg + " = " + reminder.qty + " unit";
+        if (new Date(reminder.remindAt) - now < 15*60000) {
+          await Reminder.findOneAndUpdate({_id :reminder._id},{$set:{isRemindedBefore: true }})
               const accountSid = process.env.ACCOUNT_SID 
               const authToken = process.env.AUTH_TOKEN
               const client = twilio(accountSid, authToken);
               client.messages
                 .create({
-                  body: reminder.reminderMsg,
-                  messagingServiceSid:  process.env.MESSAGINGsERVICE_SID,
+                  body: msg,
+                  messagingServiceSid:  process.env.MESSAGINGSERVICE_SID,
                   to: `+91${user.phoneNumber}`,
+                })
+                .then((message) => console.log(message.sid));
+            }
+      }
+      if(!reminder.isRemindedAfter){
+        const user = await User.findOne({_id:reminder.userId})
+        const now = new Date();
+        const url = `http://localhost:3000/reminders/${reminder.id}/verify`;
+        if (new Date(reminder.remindAt) - now < 0) {
+          await Reminder.findOneAndUpdate({_id :reminder._id},{$set:{isRemindedAfter: true }})
+              const accountSid = process.env.ACCOUNT_SID 
+              const authToken = process.env.AUTH_TOKEN
+              const client = twilio(accountSid, authToken);
+              client.messages
+                .create({
+                  body: url,
+                  messagingServiceSid:  process.env.MESSAGINGSERVICE_SID,
+                  to: `+91${user.phoneNumber}`,
+                })
+                .then((message) => console.log(message.sid));
+            }
+      }
+      if(!reminder.isConfirmed){
+        const user = await User.findOne({_id:reminder.userId})
+        const now = new Date();
+        const msg = reminder.reminderMsg + " not taken by " + user.name;
+        if (new Date(reminder.remindAt) - now < -5*60000) {
+          await Reminder.findOneAndUpdate({_id :reminder._id},{$set:{isConfirmed: true }})
+              const accountSid = process.env.ACCOUNT_SID 
+              const authToken = process.env.AUTH_TOKEN
+              const client = twilio(accountSid, authToken);
+              client.messages
+                .create({
+                  body: msg,
+                  messagingServiceSid:  process.env.MESSAGINGSERVICE_SID,
+                  to: `+91${user.guardianPhoneNumber}`,
                 })
                 .then((message) => console.log(message.sid));
             }

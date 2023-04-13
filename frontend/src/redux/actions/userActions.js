@@ -3,7 +3,7 @@ import { USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOU
 
 
 
-export const signup = (name, email, gender, phoneNumber, password) => async (dispatch) => {
+export const signup = (name, email, gender, phoneNumber, guardianPhoneNumber, password) => async (dispatch) => {
     dispatch({ type: USER_SIGNUP_REQUEST, payload: { email, password } });
     try {
       const { data } = await Axios.post("/api/users/signup", {
@@ -11,6 +11,7 @@ export const signup = (name, email, gender, phoneNumber, password) => async (dis
         email,
         gender,
         phoneNumber,
+        guardianPhoneNumber,
         password,
       });
       dispatch({ type: USER_SIGNUP_SUCCESS, payload: data });
