@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, TextField, InputAdornment} from "@mui/material";
+import { Button, Grid, Paper, TextField} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -37,6 +37,15 @@ const deleteReminder = (id) => {
     width: "80%",
     margin: "20px auto",
   };
+
+  function pill(qty){
+    var a = "";
+    while(qty>0){
+      a += '💊';
+      qty--; 
+    }
+    return a;
+  }
   return (
     <Paper className="setReminderPaper" variant="outlined" style={paperStyle}>
       <div className="setReminder">
@@ -59,6 +68,7 @@ const deleteReminder = (id) => {
           </Grid>
           <Grid item xs={2}>
           <TextField
+              type="number"
               fullWidth
               label="Quantity"
               value={qty}
@@ -94,7 +104,7 @@ const deleteReminder = (id) => {
               alignItems={"center"}
             >
               <Grid item xs={3}>
-                <p>💊{reminder.reminderMsg} - {reminder.qty} unit</p>
+                <p>🏥{reminder.reminderMsg} - {pill(reminder.qty)}</p>
               </Grid>
               <Grid item xs={7}>
               <p>Remind Me at: ⏲️{String(new Date(reminder.remindAt.toLocaleString(undefined, {timezone:"Asia/Kolkata"})))}</p>

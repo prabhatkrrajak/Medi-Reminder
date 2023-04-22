@@ -20,7 +20,7 @@ const About = () => {
       <Typography variant="body1" style={{marginLeft:"2rem"}}>✅ Customizable medication schedules: You can enter all of your medications into our web app and set up personalized schedules with specific dosing instructions.</Typography>
       <Typography variant="body1" style={{marginLeft:"2rem"}}>✅ Reminder notifications: MEDI-Reminder will send you reminders using SMS to your mobile number when it's time to take your medications, so you never forget.</Typography>
       <Typography variant="body1" style={{marginLeft:"2rem"}}>✅ Reminder verification: MEDI-Reminder will send you link for verification whether you have taken your medication or not, and let your guardian know if you have not taken the medicine on time.</Typography>
-      <Typography variant="body1" style={{marginLeft:"2rem"}}>✅ User-friendly interface: Our app is designed to be easy to use, even for those who are not tech-savvy. You can access your medication schedule and other features with just a few clicks.</Typography>
+      <Typography variant="body1" style={{marginLeft:"2rem"}}>✅ User-friendly interface: MEDI-Reminder is designed to be easy to use, even for those who are not tech-savvy. You can access your medication schedule and other features with just a few clicks.</Typography>
       <Typography variant="body1" style={{marginLeft:"2rem"}}>✅ Secure and private: We take your privacy and security seriously. All of your personal and medical information is safely stored in our app, and we never share your data with third parties.</Typography>  
       <Typography variant="body1" style={{marginTop:"1rem"}}>In summary, our Medicine Reminder Web App is a powerful tool that can help you manage your medications more effectively. With customizable schedules, reminder notification, and reminder verification, our app can help you stay on top of your medications and achieve better health outcomes.</Typography>
       <hr></hr>
@@ -40,10 +40,10 @@ const About = () => {
         <Typography variant="h5">Prabhat Kumar Rajak</Typography>
         <Typography variant="body1">📖Student at IIITG - B.Tech(CSE)</Typography>
         <Typography variant="body1">🟢I have created this web-app under the supervision of Dr. Angshuman Jana</Typography>
-        <Link to="https://www.linkedin.com/in/prabhat-kumar-rajak-a64261202/">
+        <Link to="https://www.linkedin.com/in/prabhat-kumar-rajak-a64261202/" target='_blank'>
           <LinkedInIcon/>
         </Link>
-        <Link to="https://github.com/prabhatkrrajak">
+        <Link to="https://github.com/prabhatkrrajak" target='_blank'>
           <GitHubIcon/>
         </Link>
       </Grid>
